@@ -7,10 +7,10 @@ import sys
 import traceback
 import ctypes
 
-# Leer configuración desde ghost.ini
-def cargar_configuracion(config_path="ghost.ini"):
+# Leer configuración desde d2mbot.ini
+def cargar_configuracion(config_path="d2mbot.ini"):
     config = configparser.ConfigParser()
-    config.read(config_path)
+    config.read(config_path, encoding="utf-8")
     return {
         "discord_webhook": config.get("SETTINGS", "discord"),
         "message_template_game": config.get("SETTINGS", "messagecreate"),
@@ -25,7 +25,7 @@ def cargar_configuracion(config_path="ghost.ini"):
 def configurar_titulo(titulo):
     ctypes.windll.kernel32.SetConsoleTitleW(titulo)
 
-# Redirigir la salida de la consola a un archivo si está activado en ghost.ini
+# Redirigir la salida de la consola a un archivo si está activado en d2mbot.ini
 def configurar_registro_consola():
     if config["bot_console"] == 1:
         log_file = "bot_console.log"
@@ -110,8 +110,8 @@ def procesar_linea(linea, config):
         traceback.print_exc()
 
 if __name__ == "__main__":
-    ruta_log = "C:/Servidores/logs/d2ibot.log"
-    config_path = "ghost.ini"
+    ruta_log = "Z:/Servidores/acc.d2fbot/logs/d2mbot.log"
+    config_path = "d2mbot.ini"
 
     config = cargar_configuracion(config_path)
     configurar_titulo(config["titulo"])  # Configurar el título de la ventana CMD
